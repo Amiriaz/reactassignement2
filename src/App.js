@@ -80,28 +80,44 @@ function App() {
     }
     setIndexNumber(indexNumber + 1)
   }
+ let perc = (marks / Question.length) * 100;
+  let fixedPerc = perc.toFixed(2);
   return(
+    
+   <>
+    {result ? 
     <div className="App-header">
-      {result ? (<h1> Your Mark is {marks}</h1>) : 
-      <div className=' bg-warning rounded px-2'>
-        <h1 className='text-center text-dark'>Quiz App</h1>
-      <p className="bg-primary text-center fs-5">Question Number   <span className="fs-1">{indexNumber + 1}</span> /{" "}{Question.length}</p>
-        <h1 className='py-5 text-dark'> {Question[indexNumber].Question}</h1>
-      <div>
-        {Question[indexNumber].Options.map((e, i) => {
-          return(
-            <button className='btn btn-info m-2 px-5 rounded-pill' key={i}
-            onClick= {()=> checkAns (e, Question[indexNumber].CorrectAns)}
-            >{e}</button>
-            )
-          })}
-      </div>
-      <div className='text-end py-2'>
-      <button onClick={checkAns}className="btn btn-danger px-5 rounded-pill">Next</button>
-      </div>
-      </div>}
+    <h1 className='text-center m-2'>Your Result</h1>
+    <h3> Your Mark is {marks}</h3>
+    <h3>Your Percentage is {fixedPerc} %</h3> 
     </div>
-  );
+    : 
+   <div>
+    <div className="App-header">
+    <div className=' bg-warning rounded px-2'>
+    <h1 className='text-center text-dark'>Quiz App</h1>
+            <p className="bg-primary text-center fs-5">Question Number   <span className="fs-1">{indexNumber + 1}</span> /{" "}{Question.length}</p>
+              <h1 className='py-5 text-dark'> {Question[indexNumber].Question}</h1>
+            <div>
+              {Question[indexNumber].Options.map((e, i) => {
+                return(
+                  <button className='btn btn-info m-2 px-5 rounded-pill' key={i}
+                  onClick= {()=> checkAns (e, Question[indexNumber].CorrectAns)}
+                  >{e}</button>
+                  )
+                })}
+            </div>
+            <div className='text-end py-2'>
+            <button onClick={checkAns}className="btn btn-danger px-5 rounded-pill">Next</button>
+            </div>
+            </div>
+          </div>
+
+  </div>
+  }  
+
+  </>
+  )
 }
 
 export default App;
